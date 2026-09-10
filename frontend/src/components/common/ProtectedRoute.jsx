@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useLocation, Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { FaShieldAlt, FaLock, FaArrowLeft } from 'react-icons/fa';
@@ -8,11 +8,8 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
   const { user, loading, isAuthenticated, login } = useAuth();
   const location = useLocation();
 
-  // Check if admin access has been explicitly unlocked for this session
-  const [adminUnlocked, setAdminUnlocked] = useState(() => {
-    return sessionStorage.getItem('farmart_admin_unlocked') === 'true';
-  });
-
+  // Admin lock state: ALWAYS requires Admin ID & Password authentication when accessing /admin
+  const [adminUnlocked, setAdminUnlocked] = useState(false);
   const [adminEmail, setAdminEmail] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
   const [verifying, setVerifying] = useState(false);
@@ -27,17 +24,25 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     );
   }
 
-  // General route check if not requiring admin
+  // --- GENERAL NON-ADMIN PROTECTED ROUTES ---
   if (!requireAdmin) {
     if (!isAuthenticated || !user) {
-      return <Navigate to="/login" state={{ from: location }} replace />;
+      return (
+        <div className="min-h-[75vh] flex flex-col items-center justify-center bg-bgColor px-4 text-center py-16">
+          <h2 className="text-2xl font-extrabold text-heading mb-2">Sign In Required</h2>
+          <p className="text-xs text-text max-w-md mb-6">Please sign in to access your account details.</p>
+          <Link to="/login" className="px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-xl">
+            Go to Login
+          </Link>
+        </div>
+      );
     }
     return children;
   }
 
   // --- ADMIN PATH SECURITY ---
 
-  // If user is currently signed in as customer (non-admin), show access denied
+  // 1. If a user is already signed in as a non-admin customer, block access explicitly
   if (user && user.role !== 'admin' && user.email !== 'admin@farmart.com') {
     return (
       <div className="min-h-[75vh] flex flex-col items-center justify-center bg-bgColor px-4 text-center py-16">
@@ -55,18 +60,20 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
           >
             Back to Home
           </Link>
-          <Link
-            to="/login"
+          <button
+            onClick={() => {
+              setAdminUnlocked(false);
+            }}
             className="px-5 py-2.5 bg-white border border-border text-heading hover:bg-primaryLight text-xs font-semibold rounded-xl transition-all"
           >
-            Switch to Admin Account
-          </Link>
+            Sign in as Admin
+          </button>
         </div>
       </div>
     );
   }
 
-  // Handler to verify Admin ID & Password every time accessing /admin
+  // 2. Handler to authenticate Admin ID & Password
   const handleAdminVerify = async (e) => {
     e.preventDefault();
     if (!adminEmail || !adminPassword) {
@@ -80,7 +87,6 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
       const loggedUser = await login(adminEmail, adminPassword);
       if (loggedUser) {
         if (loggedUser.role === 'admin' || adminEmail === 'admin@farmart.com') {
-          sessionStorage.setItem('farmart_admin_unlocked', 'true');
           setAdminUnlocked(true);
           toast.success('Admin Identity Verified! Accessing Dashboard.');
         } else {
@@ -97,7 +103,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     }
   };
 
-  // If Admin session is NOT unlocked yet, ALWAYS show the Admin ID & Password login prompt!
+  // 3. MANDATORY SECURITY GATE: If not explicitly unlocked in this view, ALWAYS show Admin ID & Password Login!
   if (!adminUnlocked) {
     return (
       <div className="min-h-[85vh] bg-slate-950 flex items-center justify-center p-4 font-inter text-slate-100">
@@ -174,6 +180,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     );
   }
 
+  // Admin identity verified -> Render Admin Dashboard
   return children;
 };
 
