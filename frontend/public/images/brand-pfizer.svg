@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pfizerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0F7FF"/>
+      <stop offset="100%" stop-color="#E1EFFF"/>
+    </linearGradient>
+    <linearGradient id="pfizerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0047BA"/>
+      <stop offset="100%" stop-color="#0093EE"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0047BA" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect width="320" height="180" rx="16" fill="url(#pfizerBg)"/>
+  
+  <!-- Subtle decorative grid / DNA lines -->
+  <g opacity="0.08" stroke="#0047BA" stroke-width="1.5">
+    <circle cx="280" cy="90" r="70" fill="none"/>
+    <circle cx="280" cy="90" r="45" fill="none"/>
+    <path d="M 0,30 Q 80,70 160,30 T 320,30" fill="none"/>
+    <path d="M 0,150 Q 80,110 160,150 T 320,150" fill="none"/>
+  </g>
+
+  <!-- Main Pfizer Emblem Group -->
+  <g transform="translate(45, 38)">
+    <!-- Pill/Oval Logo Badge -->
+    <rect x="0" y="0" width="230" height="74" rx="37" fill="url(#pfizerGrad)" filter="url(#shadow)"/>
+    
+    <!-- Inner White Oval Outline -->
+    <rect x="3" y="3" width="224" height="68" rx="34" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.35"/>
+
+    <!-- Pfizer Typography representation -->
+    <text x="115" y="47" font-family="'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="900" font-style="italic" fill="#ffffff" text-anchor="middle" letter-spacing="-1">Pfizer</text>
+  </g>
+
+  <!-- Subtitle Tag -->
+  <g transform="translate(160, 142)">
+    <rect x="-95" y="-14" width="190" height="24" rx="12" fill="#0047BA" fill-opacity="0.08"/>
+    <text x="0" y="2" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" fill="#0047BA" text-anchor="middle" letter-spacing="1.5">BIOPHARMACEUTICALS</text>
+  </g>
+</svg>

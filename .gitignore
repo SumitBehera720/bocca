@@ -1,0 +1,10 @@
+node_modules/
+.env
+*.log
+dist/
+.DS_Store
+*.sqlite-journal
+backend/database/*.sqlite
+backend/database/*.sqlite-journal
+frontend/dist
+.vscode/

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="abbottBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2F9FF"/>
+      <stop offset="100%" stop-color="#E5F3FF"/>
+    </linearGradient>
+    <linearGradient id="abbottGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#009CDE"/>
+      <stop offset="100%" stop-color="#00629B"/>
+    </linearGradient>
+    <filter id="abbottShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#009CDE" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="320" height="180" rx="16" fill="url(#abbottBg)"/>
+  
+  <!-- ECG Heartbeat / Pulse Diagnostic Wave -->
+  <path d="M 10,74 L 60,74 L 75,50 L 90,95 L 105,35 L 120,85 L 135,74 L 310,74" fill="none" stroke="#78BE20" stroke-width="2" opacity="0.35"/>
+
+  <!-- Abbott Emblem Card -->
+  <g transform="translate(48, 32)">
+    <rect x="0" y="0" width="224" height="78" rx="18" fill="url(#abbottGrad)" filter="url(#abbottShadow)"/>
+    
+    <!-- Abbott Ribbon 'A' icon -->
+    <g transform="translate(24, 18)">
+      <path d="M 10,42 L 20,4 L 28,22 L 14,22" fill="#78BE20" opacity="0.9"/>
+      <path d="M 28,22 L 36,42 L 24,42 L 20,30 L 16,30" fill="#ffffff"/>
+    </g>
+
+    <!-- Abbott Text -->
+    <text x="135" y="52" font-family="'Helvetica Neue', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-0.5">Abbott</text>
+  </g>
+
+  <!-- Subtitle Tag -->
+  <g transform="translate(160, 144)">
+    <rect x="-100" y="-14" width="200" height="24" rx="12" fill="#009CDE" fill-opacity="0.1"/>
+    <text x="0" y="2" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" fill="#00629B" text-anchor="middle" letter-spacing="1.2">DIAGNOSTICS & CARE</text>
+  </g>
+</svg>

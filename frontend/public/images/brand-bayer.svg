@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bayerBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FAF9"/>
+      <stop offset="100%" stop-color="#E2F5F4"/>
+    </linearGradient>
+    <linearGradient id="bayerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A396"/>
+      <stop offset="100%" stop-color="#006C7A"/>
+    </linearGradient>
+    <filter id="bayerShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#008080" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="320" height="180" rx="16" fill="url(#bayerBg)"/>
+  
+  <!-- Subtle circular waves -->
+  <g opacity="0.08" stroke="#0091DF" stroke-width="1.5">
+    <circle cx="160" cy="72" r="70" fill="none"/>
+    <circle cx="160" cy="72" r="85" fill="none"/>
+  </g>
+
+  <!-- Bayer Circle Cross Logo -->
+  <g transform="translate(160, 68)" filter="url(#bayerShadow)">
+    <circle cx="0" cy="0" r="46" fill="url(#bayerGrad)"/>
+    <circle cx="0" cy="0" r="41" fill="none" stroke="#ffffff" stroke-width="1.8" opacity="0.4"/>
+    
+    <!-- Bayer Cross Typography: B-A-Y-E-R horizontal & vertical -->
+    <g font-family="'Arial Black', 'Helvetica Neue', sans-serif" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle" dominant-baseline="central">
+      <!-- Horizontal BAYER -->
+      <text x="-26" y="0">B</text>
+      <text x="-13" y="0">A</text>
+      <text x="0" y="0">Y</text>
+      <text x="13" y="0">E</text>
+      <text x="26" y="0">R</text>
+
+      <!-- Vertical BAYER -->
+      <text x="0" y="-26">B</text>
+      <text x="0" y="-13">A</text>
+      <!-- Middle Y is shared -->
+      <text x="0" y="13">E</text>
+      <text x="0" y="26">R</text>
+    </g>
+  </g>
+
+  <!-- Subtitle Tag -->
+  <g transform="translate(160, 144)">
+    <rect x="-100" y="-14" width="200" height="24" rx="12" fill="#00A396" fill-opacity="0.1"/>
+    <text x="0" y="2" font-family="'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="700" fill="#006C7A" text-anchor="middle" letter-spacing="1.2">SCIENCE FOR A BETTER LIFE</text>
+  </g>
+</svg>
