@@ -17,9 +17,13 @@ const Login = () => {
     setSubmitting(true);
     const loggedUser = await login(email, password);
     if (loggedUser) {
-      const targetPath = location.state?.from?.pathname || 
-        ((loggedUser.role === 'admin' || email === 'admin@farmart.com') ? '/admin' : '/');
-      navigate(targetPath, { replace: true });
+      if (loggedUser.role === 'admin' || email === 'admin@farmart.com') {
+        sessionStorage.setItem('farmart_admin_active_session', 'true');
+        navigate('/admin', { replace: true });
+      } else {
+        const targetPath = location.state?.from?.pathname || '/';
+        navigate(targetPath, { replace: true });
+      }
     }
     setSubmitting(false);
   };
@@ -30,9 +34,9 @@ const Login = () => {
         <div className="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl border border-border shadow-md">
           <div className="text-center mb-8">
             <div className="w-12 h-12 bg-primaryLight text-primary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3">
-              💊
+              🔑
             </div>
-            <h1 className="text-3xl font-extrabold text-heading">Patient Sign In</h1>
+            <h1 className="text-3xl font-extrabold text-heading">Sign In</h1>
             <p className="text-xs text-text mt-1">Welcome back to Pharmart Online Pharmacy</p>
           </div>
 
@@ -45,7 +49,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full text-xs border border-border rounded-xl p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                placeholder="patient@pharmart.com"
+                placeholder="user@pharmart.com"
               />
             </div>
 
@@ -66,7 +70,7 @@ const Login = () => {
               disabled={submitting}
               className="w-full bg-primary hover:bg-primaryDark text-white font-bold py-3.5 rounded-xl shadow-xs transition-colors text-xs active:scale-98"
             >
-              {submitting ? 'Signing in...' : 'Sign In to Patient Account'}
+              {submitting ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 

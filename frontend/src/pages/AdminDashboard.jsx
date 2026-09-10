@@ -280,6 +280,7 @@ const AdminDashboard = () => {
   };
 
   const handleLogout = () => {
+    sessionStorage.removeItem('farmart_admin_active_session');
     sessionStorage.removeItem('farmart_admin_unlocked');
     logout();
     navigate('/login');
