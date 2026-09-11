@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Container from '../components/common/Container';
 import { useAuth } from '../hooks/useAuth';
+import { ADMIN_PATH } from '../config/adminConfig';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ const Login = () => {
     if (loggedUser) {
       if (loggedUser.role === 'admin' || email === 'admin@farmart.com') {
         sessionStorage.setItem('farmart_admin_active_session', 'true');
-        navigate('/admin', { replace: true });
+        navigate(`${ADMIN_PATH}/dashboard`, { replace: true });
       } else {
         const targetPath = location.state?.from?.pathname || '/';
         navigate(targetPath, { replace: true });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { ADMIN_PATH } from '../../config/adminConfig';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
   const { user, loading, isAuthenticated, logout } = useAuth();
@@ -17,9 +18,9 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
 
   // --- ADMIN PATH AUTHORIZATION & PROTECTION ---
   if (requireAdmin) {
-    // 1. Not authenticated -> Redirect to /admin/login
+    // 1. Not authenticated -> Redirect to secret admin login
     if (!isAuthenticated || !user) {
-      return <Navigate to="/admin/login" state={{ from: location }} replace />;
+      return <Navigate to={`${ADMIN_PATH}/login`} state={{ from: location }} replace />;
     }
 
     // 2. Authenticated as non-admin customer -> Return 403 Access Denied Response View

@@ -13,6 +13,7 @@ import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
 import { useAuth } from '../../hooks/useAuth';
 import { getCategories } from '../../services/productService';
+import { ADMIN_PATH } from '../../config/adminConfig';
 
 const Header = () => {
   const { cartCount, cartTotal, hasPrescriptionItems } = useCart();
@@ -71,7 +72,7 @@ const Header = () => {
                 <FaFilePrescription className="text-sm text-accent" /> Upload Rx
               </Link>
               {(user?.role === 'admin' || user?.email === 'admin@farmart.com') && (
-                <Link to="/admin/dashboard" className="text-teal-200 hover:text-white font-bold transition-colors flex items-center gap-1">
+                <Link to={`${ADMIN_PATH}/dashboard`} className="text-teal-200 hover:text-white font-bold transition-colors flex items-center gap-1">
                   <FaUserMd /> Pharmacist Portal
                 </Link>
               )}
@@ -163,7 +164,7 @@ const Header = () => {
                         )}
                       </div>
                       {(user?.role === 'admin' || user?.email === 'admin@farmart.com') && (
-                        <Link to="/admin/dashboard" className="block px-4 py-2 text-sm text-primary font-bold hover:bg-primaryLight">
+                        <Link to={`${ADMIN_PATH}/dashboard`} className="block px-4 py-2 text-sm text-primary font-bold hover:bg-primaryLight">
                           ⚙️ Pharmacy Admin Portal
                         </Link>
                       )}
@@ -382,7 +383,7 @@ const Header = () => {
                 </Link>
                 {(user?.role === 'admin' || user?.email === 'admin@farmart.com') && (
                   <Link
-                    to="/admin/dashboard"
+                    to={`${ADMIN_PATH}/dashboard`}
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-2 px-3 py-2 text-sm text-heading hover:text-primary font-medium hover:bg-primaryLight/30 rounded-lg"
                   >

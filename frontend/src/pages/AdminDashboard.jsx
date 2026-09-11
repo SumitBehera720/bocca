@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ADMIN_PATH } from '../config/adminConfig';
 import { 
   FaChartLine, 
   FaPills, 
@@ -281,7 +282,7 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/admin/login');
+    navigate(`${ADMIN_PATH}/login`);
   };
 
   // Filtered Products

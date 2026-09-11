@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Container from '../components/common/Container';
 import { useAuth } from '../hooks/useAuth';
 import { FaShieldAlt, FaLock, FaEnvelope, FaArrowLeft } from 'react-icons/fa';
+import { ADMIN_PATH } from '../config/adminConfig';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -14,9 +15,9 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // If already authenticated as admin, redirect directly to /admin/dashboard
+  // If already authenticated as admin, redirect directly to secret admin dashboard
   if (!loading && isAuthenticated && user && (user.role === 'admin' || user.email === 'admin@farmart.com')) {
-    return <Navigate to="/admin/dashboard" replace />;
+    return <Navigate to={`${ADMIN_PATH}/dashboard`} replace />;
   }
 
   const handleLogin = async (e) => {
@@ -32,7 +33,7 @@ const AdminLogin = () => {
       const loggedUser = await login(email, password);
       if (loggedUser) {
         if (loggedUser.role === 'admin' || email === 'admin@farmart.com') {
-          const from = location.state?.from?.pathname || '/admin/dashboard';
+          const from = location.state?.from?.pathname || `${ADMIN_PATH}/dashboard`;
           navigate(from, { replace: true });
         } else {
           setErrorMsg('Access Denied: Account does not have administrator privileges.');

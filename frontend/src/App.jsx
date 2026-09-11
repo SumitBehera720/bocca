@@ -19,7 +19,9 @@ import { useAuth } from './hooks/useAuth';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 
-// Helper component for /admin root route redirection
+import { ADMIN_PATH } from './config/adminConfig';
+
+// Helper component for secret admin root route redirection
 const AdminRootRedirect = () => {
   const { user, loading, isAuthenticated } = useAuth();
   if (loading) {
@@ -31,9 +33,9 @@ const AdminRootRedirect = () => {
     );
   }
   if (isAuthenticated && user && (user.role === 'admin' || user.email === 'admin@farmart.com')) {
-    return <Navigate to="/admin/dashboard" replace />;
+    return <Navigate to={`${ADMIN_PATH}/dashboard`} replace />;
   }
-  return <Navigate to="/admin/login" replace />;
+  return <Navigate to={`${ADMIN_PATH}/login`} replace />;
 };
 
 function App() {
@@ -52,11 +54,11 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/upload-prescription" element={<UploadPrescription />} />
                 
-                {/* Admin Routes */}
-                <Route path="/admin" element={<AdminRootRedirect />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
+                {/* Admin Routes (Moved from public /admin to secret ADMIN_PATH) */}
+                <Route path={ADMIN_PATH} element={<AdminRootRedirect />} />
+                <Route path={`${ADMIN_PATH}/login`} element={<AdminLogin />} />
                 <Route 
-                  path="/admin/dashboard" 
+                  path={`${ADMIN_PATH}/dashboard`} 
                   element={
                     <ProtectedRoute requireAdmin={true}>
                       <AdminDashboard />
@@ -64,7 +66,7 @@ function App() {
                   } 
                 />
                 <Route 
-                  path="/admin/*" 
+                  path={`${ADMIN_PATH}/*`} 
                   element={
                     <ProtectedRoute requireAdmin={true}>
                       <AdminDashboard />

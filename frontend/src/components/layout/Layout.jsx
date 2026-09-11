@@ -4,10 +4,11 @@ import Footer from './Footer';
 import { Toaster } from 'react-hot-toast';
 
 import { useLocation } from 'react-router-dom';
+import { ADMIN_PATH } from '../../config/adminConfig';
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith('/admin');
+  const isAdminRoute = location.pathname.startsWith(ADMIN_PATH);
 
   if (isAdminRoute) {
     return (
