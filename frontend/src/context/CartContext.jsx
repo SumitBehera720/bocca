@@ -24,11 +24,13 @@ export const CartProvider = ({ children }) => {
     fetchCart();
   }, []);
 
-  const addToCart = async (productId, quantity = 1, productName = 'Medicine') => {
+  const addToCart = async (productId, quantity = 1, productDetails = 'Medicine') => {
     try {
-      const updatedCart = await cartService.addToCart(productId, quantity);
+      const details = typeof productDetails === 'object' ? productDetails : { productName: productDetails };
+      const name = details.productName || details.name || (typeof productDetails === 'string' ? productDetails : 'Medicine');
+      const updatedCart = await cartService.addToCart(productId, quantity, details);
       setCartItems(updatedCart || []);
-      toast.success(`${productName} added to medicine cart!`);
+      toast.success(`${name} added to medicine cart!`);
       return true;
     } catch (error) {
       toast.error(error.message || 'Failed to add medicine to cart');

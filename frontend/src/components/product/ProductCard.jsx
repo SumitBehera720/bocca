@@ -53,13 +53,13 @@ const ProductCard = ({ products, fit = false }) => {
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(id, 1, productName);
+    addToCart(id, 1, products);
   };
 
   const handleToggleWishlist = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleWishlist(id, productName);
+    toggleWishlist(id, products);
   };
 
   const handleOpenQuickView = (e) => {

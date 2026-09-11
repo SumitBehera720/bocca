@@ -24,14 +24,16 @@ export const WishlistProvider = ({ children }) => {
     fetchWishlist();
   }, []);
 
-  const toggleWishlist = async (productId, productName = 'Product') => {
+  const toggleWishlist = async (productId, productDetails = 'Product') => {
     try {
-      const res = await cartService.toggleWishlist(productId);
+      const details = typeof productDetails === 'object' ? productDetails : { productName: productDetails };
+      const name = details.productName || details.name || (typeof productDetails === 'string' ? productDetails : 'Product');
+      const res = await cartService.toggleWishlist(productId, details);
       setWishlistItems(res.wishlist || []);
       if (res.added) {
-        toast.success(`${productName} added to wishlist!`);
+        toast.success(`${name} added to wishlist!`);
       } else {
-        toast.success(`${productName} removed from wishlist`);
+        toast.success(`${name} removed from wishlist`);
       }
       return res.added;
     } catch (error) {
@@ -51,7 +53,7 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const isInWishlist = (productId) => {
-    return wishlistItems.some(item => item.productId === productId);
+    return wishlistItems.some(item => Number(item.productId) === Number(productId));
   };
 
   return (

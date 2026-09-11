@@ -225,14 +225,14 @@ const SingleProduct = () => {
                   </div>
 
                   <button
-                    onClick={() => addToCart(product.id, quantity, product.productName)}
+                    onClick={() => addToCart(product.id, quantity, product)}
                     className="bg-primary hover:bg-primaryDark text-white font-bold px-7 py-3 rounded-xl shadow-xs transition-all text-sm active:scale-95"
                   >
                     Add to Cart
                   </button>
 
                   <button
-                    onClick={() => toggleWishlist(product.id, product.productName)}
+                    onClick={() => toggleWishlist(product.id, product)}
                     className={`flex items-center gap-1.5 px-4 py-3 border rounded-xl transition-colors text-sm font-semibold ${
                       isFavorite ? 'border-coral text-coral bg-coral/10' : 'border-border text-text hover:text-coral hover:border-coral'
                     }`}

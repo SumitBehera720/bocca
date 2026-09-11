@@ -15,7 +15,7 @@ const ProductQuickViewModal = ({ product, isOpen, onClose }) => {
   const { toggleWishlist, isInWishlist } = useWishlist();
 
   const handleAddToCart = () => {
-    addToCart(product.id, quantity, product.productName);
+    addToCart(product.id, quantity, product);
     onClose();
   };
 
