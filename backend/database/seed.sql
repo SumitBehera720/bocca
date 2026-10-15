@@ -1,9 +1,12 @@
 -- Seed data for Pharmart Online Pharmacy & Healthcare SQL Database
 
--- 1. Demo Users (password is 'password123')
+-- 1. Demo Users (Admin123@ and password123)
+-- Admin123@ hash: $2a$10$lZ6DRKRbSV6aO2mq0mVzB.4HtQIameVhYRp7e3eHKE.mJWff/M2Pu
+-- password123 hash: $2a$10$Hve/czEg0AyKYVklzqjUt.3guO3jzlpvfhx4nDTMnTWALwJJkWmHO
 INSERT OR REPLACE INTO users (id, username, email, password_hash, role) VALUES 
-(1, 'PatientUser', 'patient@pharmart.com', '$2a$10$7qYkXlZc8R9vXmYqVlRz0e8JkY5FhP9XmYqVlRz0e8JkY5FhP9Xm.', 'customer'),
-(2, 'HeadPharmacist', 'admin@pharmart.com', '$2a$10$7qYkXlZc8R9vXmYqVlRz0e8JkY5FhP9XmYqVlRz0e8JkY5FhP9Xm.', 'admin');
+(1, 'PatientUser', 'patient@pharmart.com', '$2a$10$Hve/czEg0AyKYVklzqjUt.3guO3jzlpvfhx4nDTMnTWALwJJkWmHO', 'customer'),
+(2, 'HeadPharmacist', 'admin@pharmart.com', '$2a$10$lZ6DRKRbSV6aO2mq0mVzB.4HtQIameVhYRp7e3eHKE.mJWff/M2Pu', 'admin'),
+(3, 'Dr Pharmacist Admin', 'admin@farmart.com', '$2a$10$lZ6DRKRbSV6aO2mq0mVzB.4HtQIameVhYRp7e3eHKE.mJWff/M2Pu', 'admin');
 
 -- 2. Pharmacy Categories
 INSERT OR REPLACE INTO categories (id, name, slug, image, description) VALUES
